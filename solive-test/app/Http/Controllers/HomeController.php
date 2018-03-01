@@ -30,9 +30,13 @@ class HomeController extends Controller
     }
 
 
+    /**
+     * Build JWT token from user data
+     * @return string JWT token
+     */
     private function getJWTToken()
     {
-        $key = "test";
+        $key = env("APP_JWT_KEY", "No_key_defined");
         $payload = [
             'user_id' => Auth::id(),
             'user_name' => Auth::user()->name,
