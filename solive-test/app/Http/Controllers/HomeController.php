@@ -35,7 +35,7 @@ class HomeController extends Controller
         $key = "test";
         $payload = [
             'user_id' => Auth::id(),
-            'user_email' => Auth::user()->email,
+            'user_name' => Auth::user()->name,
             'exp' => now()->addMinute(10)->timestamp,
         ];
         return JWT::encode($payload, $key);
