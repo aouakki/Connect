@@ -1,8 +1,8 @@
-###Solive connect
+### Solive connect
  * login/register part system using laravel 5.4
  * connected users part using socket.io 
  
- ###Prerequisites
+ ### Prerequisites
   
   * MySQL or MariaDB listning on port 3306
   * PHP >= v7.1  
