@@ -19,7 +19,8 @@ if (connected.length > 0) {
         });
     });
     socket.on('new.user.connected', function ({user}) {
-        connected.append("<li data-user='" + user.id + "'>" + user.user_name + "</li>")
+        connected.append("<li class='list-group-item' data-user='" + user.id + "'>" + "<img style='max-height: 50px; max-width: 50px; border-radius: 50%; border : 1px solid #9fa0a2; margin: 8px;' src='/uploads/avatars/" + user.avatar + "' alt='profile'>" + user.user_name + "</li>");
+
     })
 
     socket.on('old.user.disconneted', function ({user}) {
@@ -28,7 +29,7 @@ if (connected.length > 0) {
 
     socket.on('user.list', function ({users}) {
         users.forEach(function (user) {
-            connected.append("<li data-user='" + user.id + "'>" + user.user_name + "</li>");
+            connected.append("<li class='list-group-item' data-user='" + user.id + "'>" + "<img style='max-height: 50px; max-width: 50px; border-radius: 50%; border : 1px solid #9fa0a2; margin: 8px;' src='/uploads/avatars/" + user.avatar + "' alt='profile'>" + user.user_name + "</li>");
         })
     })
 

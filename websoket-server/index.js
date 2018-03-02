@@ -2,8 +2,8 @@
  * Socket IO server for handling connected users part
  */
 const CONF = require('./config.json');
-let io = require("socket.io")(CONF.port)
-let jwt = require("jsonwebtoken")
+let io = require("socket.io")(CONF.port);
+let jwt = require("jsonwebtoken");
 let users = [];
 let clients = [];
 
@@ -13,15 +13,23 @@ let clients = [];
 io.on("connect", function (socket) {
     let connected_user;
     try {
+
         socket.on("auth", ({token}) => {
             /**
              * Decrypt JWT token
              */
-            let payload = jwt.verify(token, CONF.key,
-                {
-                    algorithms: ['HS256']
-                }
-            );
+            let payload;
+
+            try {
+                payload = jwt.verify(token, CONF.key,
+                    {
+                        algorithms: ['HS256']
+                    }
+                );
+            } catch (err) {
+                console.log(err.message)
+            }
+
             /**
              * Connected user informations
              * @type {{id: *, user_name: *, connections_number: number, socket_id: Number}}
@@ -29,12 +37,13 @@ io.on("connect", function (socket) {
             connected_user = {
                 id: payload.user_id,
                 user_name: payload.user_name,
+                avatar: payload.avatar,
                 connections_number: 1,
                 socket_id: clients.length
             };
 
             /**
-             * Check if the user is already conncted ( new tab )
+             * Check if the user is already connected ( new tab )
              */
             let old_user = users.find(u => u.id == connected_user.id)
             if (!old_user) {
@@ -45,7 +54,7 @@ io.on("connect", function (socket) {
                 socket.broadcast.emit('new.user.connected', {user: connected_user})
             } else {
                 /**
-                 * if user already conncted then just increiment his connections numbers
+                 * if user already connected then just increment his connections numbers
                  */
                 old_user.connections_number++;
             }

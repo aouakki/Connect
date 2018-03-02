@@ -8,10 +8,8 @@
                     <div class="card-header" style="text-align: center;">Dashboard : Connected users</div>
 
                     <div class="card-body">
-                        <ul id="connected-users" data-token="{{$token}}">
+                        <ul style="list-style: none" id="connected-users" data-token="{{$token}}" class="list-group">
                         </ul>
-
-
                     </div>
                 </div>
             </div>

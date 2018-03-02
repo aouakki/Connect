@@ -17441,10 +17441,16 @@ __webpack_require__(36);
 
 
 
+var SOCKETIO_SERVER = 'http://localhost:3000';
+
+/**
+ * check if we are on the dahsboard page then perform socket.io logic
+ *
+ */
 var connected = $("#connected-users");
 
 if (connected.length > 0) {
-    var socket = __WEBPACK_IMPORTED_MODULE_0_socket_io_client___default()('http://localhost:3000');
+    var socket = __WEBPACK_IMPORTED_MODULE_0_socket_io_client___default()(SOCKETIO_SERVER);
     var data = $("#connected-users").attr('data-token');
     socket.on("connect", function () {
         socket.emit("auth", {
@@ -17454,14 +17460,12 @@ if (connected.length > 0) {
     socket.on('new.user.connected', function (_ref) {
         var user = _ref.user;
 
-        console.log("user connected");
-        connected.append("<li data-user='" + user.id + "'>" + user.user_name + "</li>");
+        connected.append("<li class='list-group-item' data-user='" + user.id + "'>" + "<img style='max-height: 50px; max-width: 50px; border-radius: 50%; border : 1px solid #9fa0a2; margin: 8px;' src='/uploads/avatars/" + user.avatar + "' alt='profile'>" + user.user_name + "</li>");
     });
 
     socket.on('old.user.disconneted', function (_ref2) {
         var user = _ref2.user;
 
-        console.log("user disconnected");
         $("li[data-user='" + user.id + "']").remove();
     });
 
@@ -17469,7 +17473,7 @@ if (connected.length > 0) {
         var users = _ref3.users;
 
         users.forEach(function (user) {
-            connected.append("<li data-user='" + user.id + "'>" + user.user_name + "</li>");
+            connected.append("<li class='list-group-item' data-user='" + user.id + "'>" + "<img style='max-height: 50px; max-width: 50px; border-radius: 50%; border : 1px solid #9fa0a2; margin: 8px;' src='/uploads/avatars/" + user.avatar + "' alt='profile'>" + user.user_name + "</li>");
         });
     });
 }
