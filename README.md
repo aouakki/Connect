@@ -1,5 +1,5 @@
 ### Solive connect
- * login/register part system using laravel 5.4
+ * login/register part system using laravel 5.6
  * connected users part using socket.io 
  
  ### Prerequisites
