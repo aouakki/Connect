@@ -18,17 +18,13 @@ io.on("connect", function (socket) {
             /**
              * Decrypt JWT token
              */
-            let payload;
 
-            try {
-                payload = jwt.verify(token, CONF.key,
-                    {
-                        algorithms: ['HS256']
-                    }
-                );
-            } catch (err) {
-                console.log(err.message)
-            }
+            let payload = jwt.verify(token, CONF.key,
+                {
+                    algorithms: ['HS256']
+                }
+            );
+
 
             /**
              * Connected user informations
